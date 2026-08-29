@@ -63,8 +63,7 @@ changes to the same file combine on their own.
 
 ## Testing
 
-341 assertions across 20 stages, run by a local stand-in for the CodeCrafters
-tester:
+341 assertions across 20 stages, run by a local stand-in grading tester:
 
 ```bash
 npm run grade
