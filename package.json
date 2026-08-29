@@ -1,17 +1,35 @@
 {
-    "name": "@codecrafters/build-your-own-git",
+    "name": "micro-git",
     "version": "1.0.0",
-    "description": "Build your own Git challenge, from CodeCrafters",
-    "main": "main.js",
+    "description": "A from-scratch Git implementation in JavaScript (init, hash-object, cat-file, tree/commit objects, clone, and more)",
+    "main": "app/main.js",
+    "bin": {
+        "js-git": "app/main.js"
+    },
+    "files": [
+        "app",
+        "README.md"
+    ],
     "scripts": {
         "dev": "node app/main.js",
         "test": "node --test tests/stages/*.test.js",
-        "grade": "node scripts/grade.js"
+        "grade": "node scripts/grade.js",
+        "prepublishOnly": "npm test"
     },
     "keywords": [
-        "build-your-own-x"
+        "git",
+        "git-clone",
+        "build-your-own-x",
+        "cli"
     ],
-    "author": "",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/S-Rohan-1904/git-clone.git"
+    },
+    "author": "S-Rohan-1904",
     "license": "MIT",
-    "dependencies": {}
+    "dependencies": {},
+    "engines": {
+        "node": ">=18"
+    }
 }

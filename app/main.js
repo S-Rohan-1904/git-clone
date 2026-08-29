@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const fs = require("fs");
 const path = require("path");
 
@@ -66,12 +68,16 @@ async function main(argv) {
     case "fetch":
       return gitClient.run(new FetchCommand({ remote: argv[1] || "origin" }));
     case "push":
-      return gitClient.run(new PushCommand({ remote: argv[1] || "origin", branch: argv[2] }));
+      return gitClient.run(
+        new PushCommand({ remote: argv[1] || "origin", branch: argv[2] }),
+      );
     case "rev-parse":
       gitClient.run(new RevParseCommand({ revisions: argv.slice(1) }));
       break;
     case "show-ref":
-      gitClient.run(new ShowRefCommand({ includeHead: argv.includes("--head") }));
+      gitClient.run(
+        new ShowRefCommand({ includeHead: argv.includes("--head") }),
+      );
       break;
     case "update-ref":
       handleUpdateRefCommand(argv.slice(1));
@@ -127,11 +133,17 @@ async function main(argv) {
       break;
     case "status":
       gitClient.run(
-        new StatusCommand({ porcelain: argv.includes("--porcelain") || argv.includes("--short") }),
+        new StatusCommand({
+          porcelain: argv.includes("--porcelain") || argv.includes("--short"),
+        }),
       );
       break;
     case "ls-files":
-      gitClient.run(new LsFilesCommand({ stage: argv.includes("--stage") || argv.includes("-s") }));
+      gitClient.run(
+        new LsFilesCommand({
+          stage: argv.includes("--stage") || argv.includes("-s"),
+        }),
+      );
       break;
     default:
       throw new GitError(
@@ -230,7 +242,9 @@ function handleCommitCommand(args) {
 function handleBranchCommand(args) {
   const remove = args.includes("-d") || args.includes("-D");
   const positional = args.filter((arg) => !arg.startsWith("-"));
-  gitClient.run(new BranchCommand({ name: positional[0], start: positional[1], remove }));
+  gitClient.run(
+    new BranchCommand({ name: positional[0], start: positional[1], remove }),
+  );
 }
 
 function handleCheckoutCommand(args) {
@@ -254,7 +268,9 @@ function handleTagCommand(args) {
     } else positional.push(arg);
   }
 
-  gitClient.run(new TagCommand({ ...options, name: positional[0], target: positional[1] }));
+  gitClient.run(
+    new TagCommand({ ...options, name: positional[0], target: positional[1] }),
+  );
 }
 
 function handleUpdateRefCommand(args) {
@@ -289,7 +305,9 @@ function handleLogCommand(args) {
     } else if (revision === undefined) {
       revision = arg;
     } else {
-      throw usage("usage: git log [<revision>] [--oneline] [-n <count>] [--format=<format>]");
+      throw usage(
+        "usage: git log [<revision>] [--oneline] [-n <count>] [--format=<format>]",
+      );
     }
   }
 
